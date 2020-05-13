@@ -25,4 +25,8 @@ class AnswerSelect < ApplicationRecord
   belongs_to :answer
   belongs_to :question
   belongs_to :answer_choise
+
+  def answer
+    answer_choise.name
+  end
 end

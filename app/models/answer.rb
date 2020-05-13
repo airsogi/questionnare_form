@@ -26,8 +26,8 @@ class Answer < ApplicationRecord
 
   def details
     [].concat(
-      AnswerText.where(answer_id: self.id),
-      AnswerSelect.where(answer_id: self.id)
-    )
+      AnswerText.where(answer_id: id),
+      AnswerSelect.where(answer_id: id)
+    ).sort_by {|d| d.question_id }
   end
 end

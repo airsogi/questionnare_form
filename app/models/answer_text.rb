@@ -22,4 +22,8 @@
 class AnswerText < ApplicationRecord
   belongs_to :answer
   belongs_to :question
+
+  def answer
+    text
+  end
 end

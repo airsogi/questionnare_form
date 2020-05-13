@@ -43,14 +43,18 @@ Question.seed(
   {
     id: 5,
     questionnaire: questionnaire,
-    name: 'ふるさと納税についてどう思いますか?',
-    answer_type: :long_text
+    name: 'ふるさと納税で選択した返礼品はなんですか?',
+    answer_type: :radio_group,
+    condition: 1,
+    description: 'ジャンルを選択'
   },
   {
     id: 6,
     questionnaire: questionnaire,
-    name: 'ふるさと納税についてどう思いますか?',
-    answer_type: :long_text
+    name: 'ふるさと納税制度を活用し、被災地へ寄付したことはありますか?',
+    answer_type: :radio_group,
+    condition: 1,
+    description: 'はい or いいえ'
   },
   {
     id: 7,
@@ -61,13 +65,15 @@ Question.seed(
   {
     id: 8,
     questionnaire: questionnaire,
-    name: 'ふるさと納税についてどう思いますか?',
-    answer_type: :long_text
+    name: 'ふるさと納税制度において、返礼品は必要だと思いますか?',
+    answer_type: :radio_group,
+    condition: 1,
+    description: 'はい or いいえ'
   },
   {
     id: 9,
     questionnaire: questionnaire,
-    name: 'ふるさと納税についてどう思いますか?',
+    name: 'ふるさと納税で希望する返礼品について教えて下さい',
     answer_type: :long_text
   },
   {
@@ -139,4 +145,47 @@ AnswerChoise.seed(
     question: Question.fourth,
     name: '6人以上'
   },
+  # ふるさと納税で選択した返礼品はなんですか?
+  {
+    question: Question.fifth,
+    name: '食料品'
+  },
+  {
+    question: Question.fifth,
+    name: '電化製品'
+  },
+  {
+    question: Question.fifth,
+    name: '旅行券・チケット'
+  },
+  {
+    question: Question.fifth,
+    name: '美容'
+  },
+  {
+    question: Question.fifth,
+    name: '雑貨・日用品'
+  },
+  {
+    question: Question.fifth,
+    name: 'その他'
+  },
+  # ふるさと納税制度を活用し、被災地へ寄付したことはありますか
+  {
+    question: Question.find(6),
+    name: 'はい'
+  },
+  {
+    question: Question.find(6),
+    name: 'いいえ'
+  },
+  # ふるさと納税制度において、返礼品は必要だと思いますか?
+  {
+    question: Question.find(8),
+    name: 'はい'
+  },
+  {
+    question: Question.find(8),
+    name: 'いいえ'
+  }
 )

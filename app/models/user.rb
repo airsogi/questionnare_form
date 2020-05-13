@@ -1,15 +1,15 @@
 # == Schema Information
 #
-# Table name: questionnaires
+# Table name: users
 #
 #  id         :integer          not null, primary key
-#  name       :string(30)
+#  address    :string
+#  email      :string
+#  name       :string
+#  phone      :string
+#  zip_code   :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-
-one:
-  name: MyString
-
-two:
-  name: MyString
+class User < ApplicationRecord
+end

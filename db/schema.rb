@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_13_072550) do
+ActiveRecord::Schema.define(version: 2020_05_13_090543) do
 
   create_table "answer_choises", force: :cascade do |t|
     t.integer "question_id", null: false
@@ -18,6 +18,16 @@ ActiveRecord::Schema.define(version: 2020_05_13_072550) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["question_id"], name: "index_answer_choises_on_question_id"
+  end
+
+  create_table "answer_denormalizes", force: :cascade do |t|
+    t.integer "questionnaire_id", null: false
+    t.integer "user_id", null: false
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["questionnaire_id"], name: "index_answer_denormalizes_on_questionnaire_id"
+    t.index ["user_id"], name: "index_answer_denormalizes_on_user_id"
   end
 
   create_table "answer_selects", force: :cascade do |t|
@@ -78,6 +88,8 @@ ActiveRecord::Schema.define(version: 2020_05_13_072550) do
   end
 
   add_foreign_key "answer_choises", "questions"
+  add_foreign_key "answer_denormalizes", "questionnaires"
+  add_foreign_key "answer_denormalizes", "users"
   add_foreign_key "answer_selects", "answer_choises"
   add_foreign_key "answer_selects", "answers"
   add_foreign_key "answer_selects", "questions"

@@ -1,8 +1,9 @@
 # == Schema Information
 #
-# Table name: answers
+# Table name: answer_denormalizes
 #
 #  id               :integer          not null, primary key
+#  description      :text
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  questionnaire_id :integer          not null
@@ -10,22 +11,18 @@
 #
 # Indexes
 #
-#  index_answers_on_questionnaire_id  (questionnaire_id)
-#  index_answers_on_user_id           (user_id)
+#  index_answer_denormalizes_on_questionnaire_id  (questionnaire_id)
+#  index_answer_denormalizes_on_user_id           (user_id)
 #
 # Foreign Keys
 #
 #  questionnaire_id  (questionnaire_id => questionnaires.id)
 #  user_id           (user_id => users.id)
 #
-class Answer < ApplicationRecord
-  belongs_to :questionnaire
-  belongs_to :user
+require 'test_helper'
 
-  def details
-    [].concat(
-      AnswerText.where(answer_id: id),
-      AnswerSelect.where(answer_id: id)
-    ).sort_by {|d| d.question_id }
-  end
+class AnswerDenormalizeTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
 end

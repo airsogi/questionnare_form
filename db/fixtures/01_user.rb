@@ -1,4 +1,4 @@
-user_count = 200
+user_count = 1000
 Faker::Config.locale = 'ja'
 
 user_count.times do

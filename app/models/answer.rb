@@ -22,5 +22,12 @@ class Answer < ApplicationRecord
   belongs_to :questionnaire
   belongs_to :user
 
-  has_many :details, class_name: 'AnswerDetail'
+  # has_many :details, class_name: 'AnswerDetail'
+
+  def details
+    [].concat(
+      AnswerText.where(answer_id: self.id),
+      AnswerSelect.where(answer_id: self.id)
+    )
+  end
 end

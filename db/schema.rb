@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_13_061341) do
+ActiveRecord::Schema.define(version: 2020_05_13_072550) do
 
   create_table "answer_choises", force: :cascade do |t|
     t.integer "question_id", null: false
@@ -18,6 +18,27 @@ ActiveRecord::Schema.define(version: 2020_05_13_061341) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["question_id"], name: "index_answer_choises_on_question_id"
+  end
+
+  create_table "answer_selects", force: :cascade do |t|
+    t.integer "answer_id", null: false
+    t.integer "question_id", null: false
+    t.integer "answer_choise_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["answer_choise_id"], name: "index_answer_selects_on_answer_choise_id"
+    t.index ["answer_id"], name: "index_answer_selects_on_answer_id"
+    t.index ["question_id"], name: "index_answer_selects_on_question_id"
+  end
+
+  create_table "answer_texts", force: :cascade do |t|
+    t.integer "answer_id", null: false
+    t.integer "question_id", null: false
+    t.string "text"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["answer_id"], name: "index_answer_texts_on_answer_id"
+    t.index ["question_id"], name: "index_answer_texts_on_question_id"
   end
 
   create_table "answers", force: :cascade do |t|
@@ -57,6 +78,11 @@ ActiveRecord::Schema.define(version: 2020_05_13_061341) do
   end
 
   add_foreign_key "answer_choises", "questions"
+  add_foreign_key "answer_selects", "answer_choises"
+  add_foreign_key "answer_selects", "answers"
+  add_foreign_key "answer_selects", "questions"
+  add_foreign_key "answer_texts", "answers"
+  add_foreign_key "answer_texts", "questions"
   add_foreign_key "answers", "questionnaires"
   add_foreign_key "answers", "users"
   add_foreign_key "questions", "questionnaires"

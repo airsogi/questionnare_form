@@ -20,7 +20,12 @@
 #  questionnaire_id  (questionnaire_id => questionnaires.id)
 #
 class Question < ApplicationRecord
-  enum answer_type: %i[text long_text check_group radio_group]
+  enum answer_type: {
+    text: 0,
+    long_text: 1,
+    check_group: 2,
+    radio_group: 3
+  }, _prefix: true
 
   belongs_to :questionnaire
   has_many :answer_choises

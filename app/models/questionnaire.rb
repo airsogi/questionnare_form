@@ -34,11 +34,11 @@ class Questionnaire < ApplicationRecord
   end
 
   def export!
-    csv_export("questionnaire_#{id}.csv") do |csv|
+    csv_export("questionnaire_#{id}_#{Rails.env}.csv") do |csv|
       question_names = questions.sort_by{|q| q.id }.map(&:name)
       csv << %w[お名前 住所 Eメール 電話番号 郵便番号].concat(question_names)
 
-      answers.each do |answer|
+      answers.find_each do |answer|
         user = answer.user
         out = []
         out << user.name
@@ -46,7 +46,7 @@ class Questionnaire < ApplicationRecord
         out << user.email
         out << user.phone
         out << user.zip_code
-        answer.details.each do |detail|
+        answer.details.find_each do |detail|
           out << detail.response
         end
 
@@ -56,11 +56,11 @@ class Questionnaire < ApplicationRecord
   end
 
   def export_denormalize!
-    csv_export("questionnaire_#{id}_denormalize.csv") do |csv|
+    csv_export("questionnaire_denormalize_#{id}_#{Rails.env}.csv") do |csv|
       question_names = questions.sort_by{|q| q.id }.map(&:name)
       csv << %w[お名前 住所 Eメール 電話番号 郵便番号 回答]
 
-      answer_denormalizes.each do |answer|
+      answer_denormalizes.find_each do |answer|
         user = answer.user
         out = []
         out << user.name

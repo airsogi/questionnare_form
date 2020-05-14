@@ -44,9 +44,9 @@ Question.seed(
     id: 5,
     questionnaire: questionnaire,
     name: 'ふるさと納税で選択した返礼品はなんですか?',
-    answer_type: :radio_group,
+    answer_type: :check_group,
     condition: 1,
-    description: 'ジャンルを選択'
+    description: 'ジャンルを選択(複数選択可)'
   },
   {
     id: 6,

@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_13_152603) do
+ActiveRecord::Schema.define(version: 2020_05_14_071357) do
+
+  create_table "answer_check_group_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "answer_detail_id", null: false
+    t.bigint "answer_choise_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["answer_choise_id"], name: "index_answer_check_group_details_on_answer_choise_id"
+    t.index ["answer_detail_id"], name: "index_answer_check_group_details_on_answer_detail_id"
+  end
 
   create_table "answer_choises", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "question_id", null: false
@@ -32,6 +41,7 @@ ActiveRecord::Schema.define(version: 2020_05_13_152603) do
 
   create_table "answer_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "type", null: false
+    t.bigint "question_id", null: false
     t.bigint "answer_id", null: false
     t.string "text"
     t.bigint "answer_choise_id"
@@ -39,6 +49,7 @@ ActiveRecord::Schema.define(version: 2020_05_13_152603) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["answer_choise_id"], name: "index_answer_details_on_answer_choise_id"
     t.index ["answer_id"], name: "index_answer_details_on_answer_id"
+    t.index ["question_id"], name: "index_answer_details_on_question_id"
   end
 
   create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -77,10 +88,13 @@ ActiveRecord::Schema.define(version: 2020_05_13_152603) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "answer_check_group_details", "answer_choises"
+  add_foreign_key "answer_check_group_details", "answer_details"
   add_foreign_key "answer_choises", "questions"
   add_foreign_key "answer_denormalizes", "questionnaires"
   add_foreign_key "answer_denormalizes", "users"
   add_foreign_key "answer_details", "answers"
+  add_foreign_key "answer_details", "questions"
   add_foreign_key "answers", "questionnaires"
   add_foreign_key "answers", "users"
   add_foreign_key "questions", "questionnaires"

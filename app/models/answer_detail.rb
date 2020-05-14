@@ -3,8 +3,8 @@
 # Table name: answer_details
 #
 #  id               :bigint           not null, primary key
-#  answer_type      :string(255)      not null
 #  text             :string(255)
+#  type             :string(255)      not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  answer_choise_id :bigint
@@ -24,10 +24,10 @@ class AnswerDetail < ApplicationRecord
   belongs_to :answer_choise
 
   def response
-    case answer_type
-    when 'text'
+    case type
+    when 'AnswerText'
       text
-    when 'radio_group'
+    when 'AnswerRadioGroup'
       answer_choise.name
     end
   end

@@ -11,7 +11,7 @@ User.all.each do |user|
       }
     when 'check_group', 'radio_group'
       {
-        question.name => "無回答"
+        question.name => "はい"
       }
     end
   end

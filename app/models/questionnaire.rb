@@ -8,14 +8,33 @@
 #  updated_at :datetime         not null
 #
 require 'csv'
+require 'benchmark'
 
 class Questionnaire < ApplicationRecord
   has_many :questions
   has_many :answers
   has_many :answer_denormalizes
 
+  def self.benchmark
+    log_level = Rails.logger.level
+    Rails.logger.level = :info
+
+    questionnaire = self.first
+
+    Benchmark.bm 20 do |r|
+      r.report "export!" do
+        questionnaire.export!
+      end
+      r.report "export_denormalize!" do
+        questionnaire.export_denormalize!
+      end
+    end
+
+    Rails.logger.level = log_level
+  end
+
   def export!
-    csv_benchmark('export!', "questionnaire_#{id}.csv") do |csv|
+    csv_export("questionnaire_#{id}.csv") do |csv|
       question_names = questions.sort_by{|q| q.id }.map(&:name)
       csv << %w[お名前 住所 Eメール 電話番号 郵便番号].concat(question_names)
 
@@ -37,7 +56,7 @@ class Questionnaire < ApplicationRecord
   end
 
   def export_denormalize!
-    csv_benchmark('export_denormalize!', "questionnaire_#{id}_denormalize.csv") do |csv|
+    csv_export("questionnaire_#{id}_denormalize.csv") do |csv|
       question_names = questions.sort_by{|q| q.id }.map(&:name)
       csv << %w[お名前 住所 Eメール 電話番号 郵便番号 回答]
 
@@ -58,11 +77,9 @@ class Questionnaire < ApplicationRecord
 
   private
 
-  def csv_benchmark target, filename
-    ActiveRecord::Base.benchmark(target) do
-      CSV.open(filename, 'w', encoding: 'sjis') do |csv|
-        yield(csv)
-      end
+  def csv_export filename
+    CSV.open(filename, 'w', encoding: 'sjis') do |csv|
+      yield(csv)
     end
   end
 end

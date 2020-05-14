@@ -9,7 +9,6 @@ end
 
 def create_answer_text(answer)
   AnswerText.seed do |s|
-    s.answer_type = :text
     s.answer = answer
     s.text = random_response_text
   end
@@ -20,7 +19,6 @@ def create_answer_radio_group(answer, question)
   choise = question.answer_choises[Random.rand(answer_count)]
 
   AnswerRadioGroup.seed do |s|
-    s.answer_type = :radio_group
     s.answer = answer
     s.answer_choise = choise
   end

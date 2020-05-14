@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2020_05_13_152603) do
   end
 
   create_table "answer_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "answer_type", null: false
+    t.string "type", null: false
     t.bigint "answer_id", null: false
     t.string "text"
     t.bigint "answer_choise_id"

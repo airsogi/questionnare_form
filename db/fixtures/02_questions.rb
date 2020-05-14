@@ -60,7 +60,7 @@ Question.seed(
     id: 7,
     questionnaire: questionnaire,
     name: 'ふるさと納税についてどう思いますか?',
-    answer_type: :long_text
+    answer_type: :text
   },
   {
     id: 8,
@@ -74,13 +74,13 @@ Question.seed(
     id: 9,
     questionnaire: questionnaire,
     name: 'ふるさと納税で希望する返礼品について教えて下さい',
-    answer_type: :long_text
+    answer_type: :text
   },
   {
     id: 10,
     questionnaire: questionnaire,
     name: 'ふるさと納税について不明点や疑問点を教えて下さい',
-    answer_type: :long_text
+    answer_type: :text
   },
 )
 

@@ -22,10 +22,5 @@ class Answer < ApplicationRecord
   belongs_to :questionnaire
   belongs_to :user
 
-  def details
-    [].concat(
-      AnswerText.where(answer_id: id),
-      AnswerSelect.where(answer_id: id)
-    ).sort_by {|d| d.question_id }
-  end
+  has_many :details, class_name: 'AnswerDetail'
 end

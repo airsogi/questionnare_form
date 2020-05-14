@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_13_090543) do
+ActiveRecord::Schema.define(version: 2020_05_13_152603) do
 
   create_table "answer_choises", force: :cascade do |t|
     t.integer "question_id", null: false
@@ -30,25 +30,15 @@ ActiveRecord::Schema.define(version: 2020_05_13_090543) do
     t.index ["user_id"], name: "index_answer_denormalizes_on_user_id"
   end
 
-  create_table "answer_selects", force: :cascade do |t|
+  create_table "answer_details", force: :cascade do |t|
+    t.string "answer_type", null: false
     t.integer "answer_id", null: false
-    t.integer "question_id", null: false
-    t.integer "answer_choise_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["answer_choise_id"], name: "index_answer_selects_on_answer_choise_id"
-    t.index ["answer_id"], name: "index_answer_selects_on_answer_id"
-    t.index ["question_id"], name: "index_answer_selects_on_question_id"
-  end
-
-  create_table "answer_texts", force: :cascade do |t|
-    t.integer "answer_id", null: false
-    t.integer "question_id", null: false
     t.string "text"
+    t.integer "answer_choise_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["answer_id"], name: "index_answer_texts_on_answer_id"
-    t.index ["question_id"], name: "index_answer_texts_on_question_id"
+    t.index ["answer_choise_id"], name: "index_answer_details_on_answer_choise_id"
+    t.index ["answer_id"], name: "index_answer_details_on_answer_id"
   end
 
   create_table "answers", force: :cascade do |t|
@@ -90,11 +80,7 @@ ActiveRecord::Schema.define(version: 2020_05_13_090543) do
   add_foreign_key "answer_choises", "questions"
   add_foreign_key "answer_denormalizes", "questionnaires"
   add_foreign_key "answer_denormalizes", "users"
-  add_foreign_key "answer_selects", "answer_choises"
-  add_foreign_key "answer_selects", "answers"
-  add_foreign_key "answer_selects", "questions"
-  add_foreign_key "answer_texts", "answers"
-  add_foreign_key "answer_texts", "questions"
+  add_foreign_key "answer_details", "answers"
   add_foreign_key "answers", "questionnaires"
   add_foreign_key "answers", "users"
   add_foreign_key "questions", "questionnaires"

@@ -19,13 +19,10 @@
 #
 #  answer_id  (answer_id => answers.id)
 #
+require 'test_helper'
 
-one:
-  answer: one
-  question: one
-  text: MyString
-
-two:
-  answer: two
-  question: two
-  text: MyString
+class AnswerDetailTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
+end

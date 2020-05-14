@@ -22,10 +22,10 @@
 
 one:
   answer: one
-  question: one
   text: MyString
+  answer_choise: one
 
 two:
   answer: two
-  question: two
   text: MyString
+  answer_choise: two

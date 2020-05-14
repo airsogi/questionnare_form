@@ -1,4 +1,4 @@
-user_count = 10
+user_count = 100
 Faker::Config.locale = 'ja'
 
 user_count.times do
@@ -7,6 +7,6 @@ user_count.times do
     address: Gimei.unique.address.to_s,
     email: Faker::Internet.email,
     zip_code: Faker::Address.postcode,
-    zip_code: Faker::PhoneNumber.cell_phone
+    phone: Faker::PhoneNumber.cell_phone
   )
 end

@@ -19,13 +19,16 @@
 #
 #  answer_id  (answer_id => answers.id)
 #
+class AnswerDetail < ApplicationRecord
+  belongs_to :answer
+  belongs_to :answer_choise
 
-one:
-  answer: one
-  question: one
-  text: MyString
-
-two:
-  answer: two
-  question: two
-  text: MyString
+  def response
+    case answer_type
+    when 'text'
+      text
+    when 'radio_group'
+      answer_choise.name
+    end
+  end
+end

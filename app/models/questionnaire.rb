@@ -15,7 +15,7 @@ class Questionnaire < ApplicationRecord
   has_many :answer_denormalizes
 
   def export!
-    CSV.open("questionnaire_#{id}.csv",'w', encoding: 'sjis') do |csv|
+    csv_benchmark('export!', "questionnaire_#{id}.csv") do |csv|
       question_names = questions.sort_by{|q| q.id }.map(&:name)
       csv << %w[お名前 住所 Eメール 電話番号 郵便番号].concat(question_names)
 
@@ -28,7 +28,7 @@ class Questionnaire < ApplicationRecord
         out << user.phone
         out << user.zip_code
         answer.details.each do |detail|
-          out << detail.answer
+          out << detail.response
         end
 
         csv << out
@@ -37,7 +37,7 @@ class Questionnaire < ApplicationRecord
   end
 
   def export_denormalize!
-    CSV.open("questionnaire_#{id}_denormalize.csv",'w', encoding: 'sjis') do |csv|
+    csv_benchmark('export_denormalize!', "questionnaire_#{id}_denormalize.csv") do |csv|
       question_names = questions.sort_by{|q| q.id }.map(&:name)
       csv << %w[お名前 住所 Eメール 電話番号 郵便番号 回答]
 
@@ -52,6 +52,16 @@ class Questionnaire < ApplicationRecord
         out << answer.description
 
         csv << out
+      end
+    end
+  end
+
+  private
+
+  def csv_benchmark target, filename
+    ActiveRecord::Base.benchmark(target) do
+      CSV.open(filename, 'w', encoding: 'sjis') do |csv|
+        yield(csv)
       end
     end
   end

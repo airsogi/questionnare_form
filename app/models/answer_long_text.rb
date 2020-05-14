@@ -19,13 +19,5 @@
 #
 #  answer_id  (answer_id => answers.id)
 #
-
-one:
-  answer: one
-  question: one
-  text: MyString
-
-two:
-  answer: two
-  question: two
-  text: MyString
+class AnswerLongText < AnswerDetail
+end

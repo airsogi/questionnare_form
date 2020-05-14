@@ -19,13 +19,11 @@
 #
 #  answer_id  (answer_id => answers.id)
 #
-
-one:
-  answer: one
-  question: one
-  text: MyString
-
-two:
-  answer: two
-  question: two
-  text: MyString
+class AnswerCheckGroup < AnswerDetail
+  # belongs_to :answer
+  # belongs_to :question
+  #
+  # def answer
+  #   text
+  # end
+end

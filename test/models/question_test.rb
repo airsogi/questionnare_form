@@ -2,14 +2,14 @@
 #
 # Table name: questions
 #
-#  id               :integer          not null, primary key
+#  id               :bigint           not null, primary key
 #  answer_type      :integer
 #  condition        :integer
 #  description      :string(255)
 #  name             :string(100)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-#  questionnaire_id :integer          not null
+#  questionnaire_id :bigint           not null
 #
 # Indexes
 #
@@ -17,7 +17,7 @@
 #
 # Foreign Keys
 #
-#  questionnaire_id  (questionnaire_id => questionnaires.id)
+#  fk_rails_...  (questionnaire_id => questionnaires.id)
 #
 require 'test_helper'
 

@@ -2,11 +2,11 @@
 #
 # Table name: answer_choises
 #
-#  id          :integer          not null, primary key
-#  name        :string
+#  id          :bigint           not null, primary key
+#  name        :string(255)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  question_id :integer          not null
+#  question_id :bigint           not null
 #
 # Indexes
 #
@@ -14,7 +14,7 @@
 #
 # Foreign Keys
 #
-#  question_id  (question_id => questions.id)
+#  fk_rails_...  (question_id => questions.id)
 #
 require 'test_helper'
 

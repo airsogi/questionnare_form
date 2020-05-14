@@ -2,12 +2,12 @@
 #
 # Table name: answer_denormalizes
 #
-#  id               :integer          not null, primary key
-#  description      :text
+#  id               :bigint           not null, primary key
+#  description      :text(65535)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-#  questionnaire_id :integer          not null
-#  user_id          :integer          not null
+#  questionnaire_id :bigint           not null
+#  user_id          :bigint           not null
 #
 # Indexes
 #
@@ -16,8 +16,8 @@
 #
 # Foreign Keys
 #
-#  questionnaire_id  (questionnaire_id => questionnaires.id)
-#  user_id           (user_id => users.id)
+#  fk_rails_...  (questionnaire_id => questionnaires.id)
+#  fk_rails_...  (user_id => users.id)
 #
 require 'test_helper'
 

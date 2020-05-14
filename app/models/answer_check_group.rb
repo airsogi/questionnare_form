@@ -2,13 +2,13 @@
 #
 # Table name: answer_details
 #
-#  id               :integer          not null, primary key
-#  answer_type      :string           not null
-#  text             :string
+#  id               :bigint           not null, primary key
+#  answer_type      :string(255)      not null
+#  text             :string(255)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-#  answer_choise_id :integer
-#  answer_id        :integer          not null
+#  answer_choise_id :bigint
+#  answer_id        :bigint           not null
 #
 # Indexes
 #
@@ -17,7 +17,7 @@
 #
 # Foreign Keys
 #
-#  answer_id  (answer_id => answers.id)
+#  fk_rails_...  (answer_id => answers.id)
 #
 class AnswerCheckGroup < AnswerDetail
   # belongs_to :answer

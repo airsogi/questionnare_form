@@ -12,17 +12,17 @@
 
 ActiveRecord::Schema.define(version: 2020_05_13_152603) do
 
-  create_table "answer_choises", force: :cascade do |t|
-    t.integer "question_id", null: false
+  create_table "answer_choises", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "question_id", null: false
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["question_id"], name: "index_answer_choises_on_question_id"
   end
 
-  create_table "answer_denormalizes", force: :cascade do |t|
-    t.integer "questionnaire_id", null: false
-    t.integer "user_id", null: false
+  create_table "answer_denormalizes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "questionnaire_id", null: false
+    t.bigint "user_id", null: false
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -30,44 +30,44 @@ ActiveRecord::Schema.define(version: 2020_05_13_152603) do
     t.index ["user_id"], name: "index_answer_denormalizes_on_user_id"
   end
 
-  create_table "answer_details", force: :cascade do |t|
+  create_table "answer_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "answer_type", null: false
-    t.integer "answer_id", null: false
+    t.bigint "answer_id", null: false
     t.string "text"
-    t.integer "answer_choise_id"
+    t.bigint "answer_choise_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["answer_choise_id"], name: "index_answer_details_on_answer_choise_id"
     t.index ["answer_id"], name: "index_answer_details_on_answer_id"
   end
 
-  create_table "answers", force: :cascade do |t|
-    t.integer "questionnaire_id", null: false
-    t.integer "user_id", null: false
+  create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "questionnaire_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["questionnaire_id"], name: "index_answers_on_questionnaire_id"
     t.index ["user_id"], name: "index_answers_on_user_id"
   end
 
-  create_table "questionnaires", force: :cascade do |t|
+  create_table "questionnaires", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 30
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "questions", force: :cascade do |t|
-    t.integer "questionnaire_id", null: false
+  create_table "questions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "questionnaire_id", null: false
     t.integer "answer_type"
     t.integer "condition"
     t.string "name", limit: 100
-    t.string "description", limit: 255
+    t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["questionnaire_id"], name: "index_questions_on_questionnaire_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "zip_code"
     t.string "address"

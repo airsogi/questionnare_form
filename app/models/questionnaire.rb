@@ -78,7 +78,7 @@ class Questionnaire < ApplicationRecord
   private
 
   def csv_export filename
-    CSV.open(filename, 'w', encoding: 'sjis') do |csv|
+    CSV.open(Rails.root.join('tmp', 'csv', filename), 'w', encoding: 'sjis') do |csv|
       yield(csv)
     end
   end
